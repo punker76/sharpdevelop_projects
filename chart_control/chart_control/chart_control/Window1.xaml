@@ -1,0 +1,28 @@
+<Window x:Class="chart_control.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+        Title="chart_control"
+        Height="400"
+        Width="600"
+        x:Name="window">
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    
+    <Slider x:Name="slider1" Grid.Row="0" Orientation="Horizontal" Minimum="-20" Maximum="100"/>
+    <Slider x:Name="slider2" Grid.Row="1" Orientation="Horizontal" Minimum="-20" Maximum="{Binding Path=Maximum, ElementName=axis, Mode=TwoWay}"/>
+    <oxy:Plot x:Name="plot" Grid.Row="2">
+      <oxy:Plot.Axes>
+        <oxy:LinearAxis x:Name="axis" Position="Bottom" Minimum="{Binding Path=Value, ElementName=slider1, Mode=TwoWay}" />
+        <oxy:LinearAxis Position="Left" Minimum="-20" Maximum="50" AbsoluteMaximum="100" />
+      </oxy:Plot.Axes>
+      <oxy:LineSeries ItemsSource="{Binding Path=MyCollection, ElementName=window, Mode=OneWay}"/>
+    </oxy:Plot>
+  </Grid>
+
+</Window>
